@@ -1,0 +1,38 @@
+# def output_solution_images(self):
+    #     from PIL import Image, ImageDraw
+    #     """ Outputs an image of each step of the solution. """
+    #     actions, cells = self.solution
+    #     cell_size = 60  # Adjust cell size for a gap between cells
+    #     cell_padding = 5  # Add some padding to the cells
+    #     wall_color = "#000000"
+    #     path_color = "#FF8888"
+    #     peg_color = "#4513b0"
+    #     empty_color = "#FFFFFF"
+        
+    #     for i in range(len(actions)):
+    #         img = Image.new("RGB", (self.width * cell_size, self.height * cell_size), empty_color)
+    #         draw = ImageDraw.Draw(img)
+    #         for x in range(self.width):
+    #             for y in range(self.height):
+    #                 cell_center_x = x * cell_size + cell_size // 2
+    #                 cell_center_y = y * cell_size + cell_size // 2
+                    
+    #                 # Draw cell background
+    #                 draw.rectangle((x * cell_size, y * cell_size, (x + 1) * cell_size, (y + 1) * cell_size), fill=wall_color)
+                    
+    #                 # Draw different elements based on cell content
+    #                 if (actions[i][0], actions[i][1]) == (y, x):
+    #                     color = path_color
+    #                 elif (actions[i][0] + actions[i][2][0] // 2, actions[i][1] + actions[i][2][1] // 2) == (y, x):
+    #                     color = path_color
+    #                 elif cells[i][y][x] == "o":
+    #                     color = peg_color
+    #                 elif cells[i][y][x] == "x":
+    #                     color = empty_color
+    #                 else:
+    #                     color = wall_color
+                    
+    #                 draw.rectangle((x * cell_size + cell_padding, y * cell_size + cell_padding,
+    #                                 (x + 1) * cell_size - cell_padding, (y + 1) * cell_size - cell_padding), fill=color)
+            
+    #         img.save(f"./solution/step-{i}.png")
