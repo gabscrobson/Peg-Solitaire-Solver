@@ -1,3 +1,4 @@
+import os
 import sys
 
 class Node():
@@ -136,8 +137,15 @@ class Game():
             print(" ")
 
     def output_solution_images(self):
-        from PIL import Image, ImageDraw
         """ Outputs an image of each step of the solution. """
+        from PIL import Image, ImageDraw
+        from shutil import rmtree
+
+        # Delete old images or create directory if needed
+        if os.path.exists("./solution"):
+            rmtree("./solution")
+        os.mkdir("./solution")
+        
         actions, cells = self.solution
         cell_size = 60  # Adjust cell size for a gap between cells
         cell_padding = 5  # Add some padding to the cells
