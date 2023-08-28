@@ -141,6 +141,7 @@ class Game():
         cell_padding = 5  # Add some padding to the cells
         wall_color = "#888888"
         path_color = "#ff7777"
+        delete_color = "#ff0000"
         peg_color = "#4513b0"
         empty_color = "#444444"
         
