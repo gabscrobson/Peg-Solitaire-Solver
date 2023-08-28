@@ -108,6 +108,8 @@ class Game():
                     actions.append(node.action)
                     cells.append(node.state)
                     node = node.parent
+                actions.append(self.initial.action)
+                cells.append(self.initial.state)
                 actions.reverse()
                 cells.reverse()
                 self.solution = (actions, cells)
@@ -126,7 +128,7 @@ class Game():
         """ Prints the solution. """
         actions, cells = self.solution
         print(f"Solution requires {len(actions)} steps")
-        for i in range(len(actions)):
+        for i in range(1, len(actions)):
             print(f"Step {i + 1}:")
             for line in cells[i]:
                 print("".join(line))
@@ -139,11 +141,11 @@ class Game():
         actions, cells = self.solution
         cell_size = 60  # Adjust cell size for a gap between cells
         cell_padding = 5  # Add some padding to the cells
-        wall_color = "#888888"
-        path_color = "#ff7777"
-        delete_color = "#ff0000"
-        peg_color = "#4513b0"
-        empty_color = "#444444"
+        wall_color = "#999999"
+        empty_color = "#333333"
+        peg_color = "#2266aa"
+        path_color = "#66ff66"
+        delete_color = "#ff6666"
         
         for i in range(len(actions)):
             img = Image.new("RGB", (self.width * cell_size, self.height * cell_size), wall_color)
@@ -155,10 +157,10 @@ class Game():
                     draw.ellipse((x * cell_size, y * cell_size, (x + 1) * cell_size, (y + 1) * cell_size), fill=wall_color)
                     
                     # Draw different elements based on cell content
-                    if (actions[i][0], actions[i][1]) == (y, x):
+                    if actions[i] and (actions[i][0], actions[i][1]) == (y, x):
                         color = path_color
-                    elif (actions[i][0] + actions[i][2][0] // 2, actions[i][1] + actions[i][2][1] // 2) == (y, x):
-                        color = path_color
+                    elif actions[i] and (actions[i][0] + actions[i][2][0] // 2, actions[i][1] + actions[i][2][1] // 2) == (y, x):
+                        color = delete_color
                     elif cells[i][y][x] == "o":
                         color = peg_color
                     elif cells[i][y][x] == "x":
@@ -170,8 +172,6 @@ class Game():
                                 (x + 1) * cell_size - cell_padding, (y + 1) * cell_size - cell_padding), fill=color)
             
             img.save(f"./solution/step-{i}.png")
-
-
 
 g = Game(sys.argv[1])
 if g.solve():

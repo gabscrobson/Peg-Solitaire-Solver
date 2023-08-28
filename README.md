@@ -20,3 +20,5 @@ ooooooo
 ##ooo##
 ##ooo##
 ```
+
+The program will output images in the solution folder showing the steps to solve the board.
